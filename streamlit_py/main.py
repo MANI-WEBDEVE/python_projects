@@ -8,12 +8,12 @@ import numpy as np
 st.set_page_config(
     layout="wide",
     page_icon="📊",
-    page_title="Data Visualization"
+    page_title="Data Reader App"
 )
 
 # set the title and paragraph
-st.title("Data Visualization")
-st.markdown("This is a simple data visualization app. You can upload a CSV, Excel and JSON file and visualize the data.")
+st.title("Data Reader 📖")
+st.markdown("This is a simple data Reader app. You can upload a CSV, Excel and JSON file and visualize the data.")
 
 uploade_file=st.file_uploader("Upload a file (CSV, Excel or JSON)", type=["csv", "xlsx", "json"], accept_multiple_files=True)
 
