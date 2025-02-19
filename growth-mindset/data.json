@@ -1,14 +1,16 @@
 {
     "users": [
         {
-            "username": "john@gmail.com",
+            "username": "test@gmail.com",
             "password": "$2b$12$lGGbqvtuzvPIfwGWqYEBf.7KIoQkJAdKCrfmM.OBtqhP6czEHhNV2"
         }
+        
     ],
     "entries": [
         {
-            "username": "john@gmail.com",
-            "entry": "Create  a blog app"
+            "username": "test@gmail.com",
+            "message": "hello test"
         }
+       
     ]
 }

@@ -1,65 +1,44 @@
 import streamlit as st
-import json
-from auth import sign_up, sign_in, load_data, save_data
+import auth  
+import sidebar
+st.set_page_config(page_title="Growth Mindset App")
 
 # Session state for authentication
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
-if "username" not in st.session_state:
-    st.session_state["username"] = ""
-
-st.title("🌱 Growth Mindset Challenge")
-
-# Navigation Tabs
-page = st.sidebar.radio("Navigation", ["Sign In", "Sign Up", "Submit Entry"])
-
-# **🔹 SIGN UP PAGE**
-if page == "Sign Up":
-    st.subheader("📝 Create an Account")
-    new_username = st.text_input("Username")
-    new_password = st.text_input("Password", type="password")
-
-    if st.button("Sign Up"):
-        success, message = sign_up(new_username, new_password)
-        st.success(message) if success else st.error(message)
-
-# **🔹 SIGN IN PAGE**
-elif page == "Sign In":
-    st.subheader("🔑 Login to Your Account")
+sidebar.show_sidebar()
+st.title("Welcome to Growth Mindset Web App")
+st.warning("For your safety, please do not share any personal information here. Use only random usernames and passwords for login and sign up.")
+# Authentication UI
+if not st.session_state["authenticated"]:
+    st.subheader("Sign In")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
-    if st.button("Sign In"):
-        success, message = sign_in(username, password)
+    if st.button("Login"):
+        success, message = auth.sign_in(username, password)
         if success:
-            st.session_state["refresh"] = not st.session_state.get("refresh", False)
             st.session_state["authenticated"] = True
             st.session_state["username"] = username
-            st.success(message)
             st.rerun()
         else:
             st.error(message)
 
-# **🔹 SUBMIT GROWTH MINDSET ENTRY**
-elif page == "Submit Entry":
-    if not st.session_state["authenticated"]:
-        st.warning("⚠️ Please Sign In to submit an entry.")
-        st.stop()
+    st.subheader("Sign Up")
+    new_username = st.text_input("New Username")
+    new_password = st.text_input("New Password", type="password")
 
-    st.subheader(f"📖 Welcome, {st.session_state['username']}!")
-    mindset_entry = st.text_area("How do you practice a Growth Mindset?")
-
-    if st.button("Submit Entry"):
-        if mindset_entry:
-            data = load_data()
-            data["entries"].append({"username": st.session_state["username"], "entry": mindset_entry})
-            save_data(data)
-            st.success("✅ Entry submitted successfully!")
+    if st.button("Create Account"):
+        success, message = auth.sign_up(new_username, new_password)
+        if success:
+            st.success(message)
         else:
-            st.warning("⚠️ Please enter your response before submitting.")
+            st.error(message)
 
-# **🔹 DISPLAY PAST ENTRIES**
-st.sidebar.subheader("📜 Past Entries")
-data = load_data()
-for entry in data["entries"]:
-    st.sidebar.text(f"📝 {entry['username'].split('@')[0]}: {entry['entry'][:50]}...")
+else:
+    st.success(f"Welcome, {st.session_state['username']}! 🎉")
+    if st.button("Submit an Entry"):
+        st.switch_page("pages/submit-entry.py")  # Redirect to Submit Entry page
+    if st.button("Logout"):
+        st.session_state["authenticated"] = False
+        st.rerun()
