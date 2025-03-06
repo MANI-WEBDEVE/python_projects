@@ -11,5 +11,10 @@
         "src": "/(.*)",
         "dest": "api_ser.py"
       }
-    ]
+    ],
+    "functions": {
+      "api_ser.py": {
+        "memory": 3008  
+      }
+    }
   }
