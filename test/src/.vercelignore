@@ -1,5 +1,0 @@
-# Exclude large files/folders
-images/
-data/
-__pycache__/
-*.log
