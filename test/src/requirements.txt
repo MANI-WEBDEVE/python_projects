@@ -2,9 +2,5 @@ streamlit
 opencv-python
 requests
 fastapi
-<<<<<<< HEAD
 cloudinary
 dotenv
-=======
-cloudinary
->>>>>>> c266bdafb844c1e1860df9b721f4e6471bc26f31
