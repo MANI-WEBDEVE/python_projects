@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import cloudinary
 import cloudinary.uploader
+<<<<<<< HEAD
 from dotenv import load_dotenv
 import os
 
@@ -15,6 +16,15 @@ if os.getenv("cloud_name") and os.getenv('api_key') and os.getenv('api_secret'):
         api_secret=os.getenv('api_secret')
     )
 
+=======
+
+# Cloudinary Configuration
+cloudinary.config(
+    cloud_name="dys8zymcx",
+    api_key="754948374267897",
+    api_secret="rgvtpvNivIVWoBB7Od2_lE7VzLI"
+)
+>>>>>>> c266bdafb844c1e1860df9b721f4e6471bc26f31
 
 # FastAPI App
 app = FastAPI()
